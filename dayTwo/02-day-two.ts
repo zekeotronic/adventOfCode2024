@@ -54,6 +54,23 @@ function isSafe(report: number[]) : boolean {
   return sorted && range;
 }
 
+function isSafeWithDampener(report: number[]) : boolean {
+  const maxIndex = report.length - 1;
+  const slices : number[][] = [];
+  let removed = 0;
+  report.forEach((num, index) => {
+    if (index === maxIndex) {
+      return;
+    }
+    if (removed === 0) {
+      let slice  = report.slice(1);
+      slices.push(slice);
+    } else {
+      let slice = [...report.slice(0, removed), ...report.slice(removed + 1)];
+    }
+  });
+}
+
 function findTotalSafe(reports: number[][]) : number {
   let safe = 0;
   reports.forEach((report) => {
@@ -67,3 +84,7 @@ function findTotalSafe(reports: number[][]) : number {
 const totalSafeReports = findTotalSafe(numReports);
 
 console.log(totalSafeReports);
+
+numReports.forEach((report) => {
+  console.log(isSafeWithDampener(report));
+});
