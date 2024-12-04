@@ -55,20 +55,21 @@ function isSafe(report: number[]) : boolean {
 }
 
 function isSafeWithDampener(report: number[]) : boolean {
-  const maxIndex = report.length - 1;
   const slices : number[][] = [];
   let removed = 0;
-  report.forEach((num, index) => {
-    if (index === maxIndex) {
-      return;
-    }
+  report.forEach(() => {
     if (removed === 0) {
-      let slice  = report.slice(1);
+      const slice  = report.slice(1);
       slices.push(slice);
+      removed++;
     } else {
-      let slice = [...report.slice(0, removed), ...report.slice(removed + 1)];
+      const slice = [...report.slice(0, removed), ...report.slice(removed + 1)];
+      slices.push(slice);
+      removed++;
     }
   });
+  const safe = slices.some((slice) => isSafe(slice));
+  return safe;
 }
 
 function findTotalSafe(reports: number[][]) : number {
@@ -81,10 +82,24 @@ function findTotalSafe(reports: number[][]) : number {
   return safe;
 }
 
+function findTotalSafeWithDampening(reports: number[][]) : number {
+  let safe = 0;
+  reports.forEach((report) => {
+    if (isSafe(report) || isSafeWithDampener(report)) {
+      safe += 1;
+    }
+  });
+  return safe;
+}
+
+
+// Part 1
 const totalSafeReports = findTotalSafe(numReports);
 
 console.log(totalSafeReports);
 
-numReports.forEach((report) => {
-  console.log(isSafeWithDampener(report));
-});
+// Part 2
+
+const totalSafeReportsWithDampening = findTotalSafeWithDampening(numReports);
+
+console.log(totalSafeReportsWithDampening);
