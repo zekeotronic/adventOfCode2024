@@ -1,0 +1,1 @@
+const input = await Deno.readTextFileSync("input.txt");
