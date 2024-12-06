@@ -1,4 +1,4 @@
-const input = await Deno.readTextFile("three-input.txt");
+const input = await Deno.readTextFile("input.txt");
 
 function mul(x : number, y : number) : number {
   return x * y;

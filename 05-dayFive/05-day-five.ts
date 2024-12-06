@@ -1,6 +1,6 @@
 type Rule = [number, number];
 
-const input = await Deno.readTextFileSync("five-input.txt");
+const input = await Deno.readTextFileSync("input.txt");
 
 const lines = input.split("\n").map((line) => line.trim());
 
@@ -50,20 +50,16 @@ function reorderUpdate(update: number[], rules: number[][]): number[] {
     const graph: Record<number, number[]> = {};
     const inDegree: Record<number, number> = {};
     const pages = new Set(update);
-
-    // Initialize graph and in-degree
     for (const page of pages) {
         graph[page] = [];
         inDegree[page] = 0;
     }
-
     for (const [x, y] of rules) {
         if (pages.has(x) && pages.has(y)) {
             graph[x].push(y);
             inDegree[y] += 1;
         }
     }
-
     const queue: number[] = [];
     const ordered: number[] = [];
     for (const page of pages) {
@@ -71,7 +67,6 @@ function reorderUpdate(update: number[], rules: number[][]): number[] {
             queue.push(page);
         }
     }
-
     while (queue.length > 0) {
         const current = queue.shift()!;
         ordered.push(current);
@@ -82,7 +77,6 @@ function reorderUpdate(update: number[], rules: number[][]): number[] {
             }
         }
     }
-
     return ordered;
 }
 

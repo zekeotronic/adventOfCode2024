@@ -1,4 +1,4 @@
-const input = await Deno.readTextFile("one-input.txt");
+const input = await Deno.readTextFile("input.txt");
 const lines = input.split("\n").map((line) => line.trim()).map((line) => line.split('   '));
 const leftList = lines.map((line) => +line[0]).sort((a, b) => a - b);
 const rightList = lines.map((line) => +line[1]).sort((a, b) => a - b);

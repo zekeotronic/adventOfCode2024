@@ -1,4 +1,4 @@
-const input = await Deno.readTextFileSync("four-input.txt");
+const input = await Deno.readTextFileSync("input.txt");
 const matrix = input.split("\n").map((x) => x.trim());
 
 
