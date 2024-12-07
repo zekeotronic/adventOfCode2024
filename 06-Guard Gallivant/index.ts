@@ -22,7 +22,6 @@ for (let y = 0; y < OUT; y++) {
 function isFrontClear() : boolean {
   let x = guardPosition.x;
   let y = guardPosition.y;
-
   switch (facing) {
     case "N":
       y -= 1;
@@ -81,7 +80,7 @@ function move(isFrontClear : boolean, ) : void {
     distinctPositions.push({ x: x, y: y });
   }
   guardPosition = { x: x, y: y };
-  }
+}
 
 function isOnBoundary() : boolean {
   const leftSide = guardPosition.x === 0 && facing === "W";
@@ -96,3 +95,5 @@ while (!isOnBoundary()) {
 }
 
 console.log(distinctPositions.length);
+
+
